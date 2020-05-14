@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Store;
+use App\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('stores', 'StoreController@Stores');
+Route::get('stores/{store}', 'StoreController@Show');
+Route::post('stores', 'StoreController@CreateStore');
+Route::post('stores/update/{store}', 'StoreController@UpdateStore');
+Route::delete('stores/{store}', 'StoreController@DeleteStore');
+//Routes products
+Route::get('products', 'ProductController@AllProducts');
