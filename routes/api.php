@@ -26,3 +26,4 @@ Route::post('stores/update/{store}', 'StoreController@UpdateStore');
 Route::delete('stores/{store}', 'StoreController@DeleteStore');
 //Routes products
 Route::get('products', 'ProductController@AllProducts');
+Route::post('products', 'ProductController@SaveProduct');
