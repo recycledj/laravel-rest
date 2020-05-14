@@ -16,7 +16,7 @@ class CreateStoresTable extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->text('name');
-            $table->date_format();
+            $table->date('oppening_date')->date_format('dd-mm-YYYY');
             $table->timestamps();
         });
     }
