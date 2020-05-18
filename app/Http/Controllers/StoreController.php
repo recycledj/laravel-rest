@@ -33,4 +33,9 @@ class StoreController extends Controller
         $store->delete();
         return response()->json('Deleted', 200);
     }
+    public function ProductsForStore(Store $store) {
+        $id = $store->id;
+        $products = DB::table('products')->where('store_id', $id)->get();
+        return response()->json($products, 200);
+    }
 }

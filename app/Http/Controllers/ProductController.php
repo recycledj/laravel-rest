@@ -21,20 +21,43 @@ class ProductController extends Controller
     }
     public function SaveProduct(Request $request)
     {
-        if($request->hasfile('path')) {
-            $file = $request->file('path');
+        $product = new Product();
+        if($request->hasFile('path')) {
+            $file = $request->path;
             $name = time().$file->getClientOriginalName();
             $file->move(public_path().'/images/', $name);
         }
-        $product = new Product();
         $product->name = $request->name;
         $product->description = $request->description;
         $product->SKU = $request->SKU;
         $product->value = $request->value;
-        $product->path = $name;
         $product->store_id = $request->store_id;
+        $product->path = $name;
         $product->save();
 
         return response()->json('Created', 201);
+    }
+    public function DeleteProduct(Product $product) {
+        $product->delete();
+        return response()->json('Deleted', 200);
+    }
+    public function GetProduct(Product $product) {
+        return $product;
+    }
+    public function UpdateProduct(Request $request, Product $product) {
+        $product = Product::FindOrFail($product->id);
+        if($request->hasFile('path')) {
+            $file = $request->path;
+            $name = time().$file->getClientOriginalName();
+            $file->move(public_path().'/images/', $name);
+        }
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->SKU = $request->SKU;
+        $product->value = $request->value;
+        $product->store_id = $request->store_id;
+        $product->path = $name;
+        $product->save();
+        return response()->json('Update', 200);
     }
 }
